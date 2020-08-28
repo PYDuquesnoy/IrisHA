@@ -1,0 +1,62 @@
+version: '3.7'
+services:
+  app1:
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/config
+    ports:
+      - '11773:51773'
+      - '12773:52773'
+    hostname: app1
+    image: intersystems/iris:2020.2.0.211.0
+    init: true
+    restart: on-failure
+    volumes:
+      - app1sys:/dur
+      - ./license:/license
+      - ./logsApp2:/logs
+      - ./shared:/shared
+    command: --key /license/iris.key
+  app2:
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/config
+    ports:
+      - '21773:51773'
+      - '22773:52773'
+    hostname: app2
+    image: intersystems/iris:2020.2.0.211.0
+    init: true
+    restart: on-failure
+    volumes:
+      - app2sys:/dur
+      - ./license:/license
+      - ./logsApp1:/logs
+      - ./shared:/shared
+    command: --key /license/iris.key
+
+  irisM1:
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/config
+    ports:
+      - '31773:51773'
+      - '32773:52773'
+    expose:
+      - '2188'
+    hostname: irisM1
+    image: intersystems/iris:2020.2.0.211.0
+    init: true
+    restart: on-failure
+    volumes:
+      - m1sys:/dur
+      - ./license:/license
+      - ./logsM1:/logs
+      - ./shared:/shared
+    command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --key /license/iris.key
+  
+volumes:
+  m1sys: ~
+  app1sys: ~
+  app2sys: ~
+networks:
+  default:
+    external:
+      name: sam-100115-unix_default

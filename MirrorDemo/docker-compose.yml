@@ -1,0 +1,67 @@
+version: '3.7'
+services:
+  irisM1:
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/config
+    ports:
+      - '21773:51773'
+      - '22773:52773'
+    expose:
+      - '2188'
+    hostname: irisM1
+    image: intersystems/iris:2020.2.0.211.0
+    init: true
+    restart: on-failure
+    volumes:
+      - m1sys:/dur
+      - ./license:/license
+      - ./logsM1:/logs
+      - ./shared:/shared
+    command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --key /license/iris.key
+  irisM2:
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/config
+    ports:
+      - '31773:51773'
+      - '32773:52773'
+    expose:
+      - '2188'
+    hostname: irisM2        
+    image: intersystems/iris:2020.2.0.211.0
+    init: true
+    restart: on-failure
+    volumes:
+      - m2sys:/dur
+      - ./license:/license
+      - ./logsM2:/logs
+      - ./shared:/shared
+    command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --key /license/iris.key  
+  arbiter:
+    init: true
+    hostname: arbiter
+    image: intersystems/arbiter:2020.2.0.211.0
+    restart: on-failure
+    expose:
+      - '2188'
+    command: 
+      - /usr/local/etc/irissys/startISCAgent.sh 2188
+  webserver:
+      hostname: webserver
+      image: intersystems/webgateway:2020.2.0.211.0
+      init: true
+      restart: on-failure
+      ports:
+        - '20080:80'
+      volumes:
+        - ./webgatewayconfig:/config.d
+      environment:
+        - ISC_DATA_DIRECTORY=/config.d
+      command: 
+        - /bin/bash -c "/configHttpd.sh && apache2ctl start"
+volumes:
+  m1sys: ~
+  m2sys: ~
+networks:
+    default:
+      external:
+        name: sam-100115-unix_default
