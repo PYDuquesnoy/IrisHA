@@ -4,7 +4,7 @@ services:
     environment:
       - ISC_DATA_DIRECTORY=/dur/config
     ports:
-      - '21773:51773'
+      - '21773:1972'
       - '22773:52773'
     expose:
       - '2188'
@@ -17,12 +17,13 @@ services:
       - ./license:/license
       - ./logsM1:/logs
       - ./shared:/shared
-    command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --key /license/iris.key
+    #command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --key /license/iris.key
+    command: --key /license/iris.key
   irisM2:
     environment:
       - ISC_DATA_DIRECTORY=/dur/config
     ports:
-      - '31773:51773'
+      - '31772:1972'
       - '32773:52773'
     expose:
       - '2188'
@@ -35,7 +36,8 @@ services:
       - ./license:/license
       - ./logsM2:/logs
       - ./shared:/shared
-    command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --key /license/iris.key  
+    #command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" 
+    command: --key /license/iris.key  
   arbiter:
     init: true
     hostname: arbiter

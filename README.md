@@ -55,7 +55,7 @@ Connect with a browser to each server
 
 
 
-From within the docker network, the servers can reference each other by names "irisM1", "irisM2", "arbiter", and use the ports 2188 for ISCAgent and 51773 for SuperServer in their mirroring configuration.
+From within the docker network, the servers can reference each other by names "irisM1", "irisM2", "arbiter", and use the ports 2188 for ISCAgent and 1972 for SuperServer in their mirroring configuration.
 
 The docker-compose already starts up the ISCAgent on each iris node, so you can directly enable and configure mirroring in the portal after logging in.
 
