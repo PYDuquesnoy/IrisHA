@@ -9,7 +9,7 @@ services:
     expose:
       - '2188'
     hostname: irisM1
-    image: intersystems/iris:2020.2.0.211.0
+    image: containers.intersystems.com/intersystems/iris:2021.1.0.215.0
     init: true
     restart: on-failure
     volumes:
@@ -27,7 +27,7 @@ services:
     expose:
       - '2188'
     hostname: irisM2        
-    image: intersystems/iris:2020.2.0.211.0
+    image: containers.intersystems.com/intersystems/iris:2021.1.0.215.0
     init: true
     restart: on-failure
     volumes:
@@ -39,7 +39,7 @@ services:
   arbiter:
     init: true
     hostname: arbiter
-    image: intersystems/arbiter:2020.2.0.211.0
+    image: containers.intersystems.com/intersystems/arbiter:2021.1.0.215.0
     restart: on-failure
     expose:
       - '2188'
@@ -47,7 +47,7 @@ services:
       - /usr/local/etc/irissys/startISCAgent.sh 2188
   webserver:
       hostname: webserver
-      image: intersystems/webgateway:2020.2.0.211.0
+      image: containers.intersystems.com/intersystems/webgateway:2021.1.0.215.0
       init: true
       restart: on-failure
       ports:
@@ -61,7 +61,7 @@ services:
 volumes:
   m1sys: ~
   m2sys: ~
-networks:
-    default:
-      external:
-        name: sam-100115-unix_default
+#networks:
+#    default:
+#      external:
+#        name: sam-100115-unix_default
