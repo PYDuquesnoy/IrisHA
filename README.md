@@ -6,7 +6,7 @@ This is a set of docker-compose files to bring up servers that allow to build ma
 
 * MirrorDemo
 
-  2 IRIS Servers (irisM1 and irisM2) and one arbiter (arbiter) that can be configured as a Failover Mirror. 
+  2 IRIS Servers (irisM1 and irisM2) and one arbiter (arbiter) that are pre-configured as a Failover Mirror. 
 
   
 
@@ -45,7 +45,7 @@ When ready, run the docker-compose:
 docker-compose up
 ```
 
-Connect with a browser to each server
+Connect with a browser to each server, using user/password: _SYSTEM/SYS
 
 | Server    | URL from Host                               |
 | --------- | ------------------------------------------- |

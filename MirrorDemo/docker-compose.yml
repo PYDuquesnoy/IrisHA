@@ -3,6 +3,8 @@ services:
   irisM1:
     environment:
       - ISC_DATA_DIRECTORY=/dur/config
+      #This merges from the cpf containing the mirror config and the IRIS password 
+      - ISC_CPF_MERGE_FILE=/shared/irisM1Merge.cpf
     ports:
       - '21773:1972'
       - '22773:52773'
@@ -22,6 +24,8 @@ services:
   irisM2:
     environment:
       - ISC_DATA_DIRECTORY=/dur/config
+      #This merges from the cpf containing the mirror config and the IRIS password 
+      - ISC_CPF_MERGE_FILE=/shared/irisM2Merge.cpf
     ports:
       - '31772:1972'
       - '32773:52773'

@@ -1,0 +1,15 @@
+[Startup]
+MirrorMember=backup
+MirrorPrimary=irisM1
+MirrorSetName=MIR
+ArbiterURL=arbiter:2188
+PasswordHash=a299aa705a2d4ff44cace36dff503d8c7056f35c,cilc6a5d
+
+[config]
+globals=0,0,250,0,0,0
+routines=35
+
+[Actions]
+CreateDatabaseFile:Directory=/dur/config/mgr/appdata,MirrorSetName=MIR,MirrorDBName=appdata,RunCatchupDBOnCreate=1
+CreateDatabase:Name=appdata,Directory=/dur/config/mgr/appdata
+CreateNamespace:Name=myapp,Globals=appdata,Routines=appdata
