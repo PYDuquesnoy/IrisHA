@@ -11,16 +11,17 @@ services:
     expose:
       - '2188'
     hostname: irisM1
-    image: containers.intersystems.com/intersystems/iris:2021.1.0.215.0
+    #image: containers.intersystems.com/intersystems/iris:2021.1.0.215.0
+    image: containers.intersystems.com/intersystems/iris:2022.1.0.209.0
     init: true
     restart: on-failure
     volumes:
-      - m1sys:/dur
+      - ./m1sys:/dur
       - ./license:/license
       - ./logsM1:/logs
       - ./shared:/shared
     #command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --key /license/iris.key
-    command: --key /license/iris.key
+    command: --key /license/iris.key --check-caps false
   irisM2:
     environment:
       - ISC_DATA_DIRECTORY=/dur/config
@@ -32,20 +33,22 @@ services:
     expose:
       - '2188'
     hostname: irisM2        
-    image: containers.intersystems.com/intersystems/iris:2021.1.0.215.0
+    #image: containers.intersystems.com/intersystems/iris:2021.1.0.215.0
+    image: containers.intersystems.com/intersystems/iris:2022.1.0.209.0
     init: true
     restart: on-failure
     volumes:
-      - m2sys:/dur
+      - ./m2sys:/dur
       - ./license:/license
       - ./logsM2:/logs
       - ./shared:/shared
     #command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" 
-    command: --key /license/iris.key  
+    command: --key /license/iris.key --check-caps false 
   arbiter:
     init: true
     hostname: arbiter
-    image: containers.intersystems.com/intersystems/arbiter:2021.1.0.215.0
+    #image: containers.intersystems.com/intersystems/arbiter:2021.1.0.215.0
+    image: containers.intersystems.com/intersystems/arbiter:2022.1.0.209.0
     restart: on-failure
     expose:
       - '2188'
@@ -53,11 +56,12 @@ services:
       - /usr/local/etc/irissys/startISCAgent.sh 2188
   webserver:
       hostname: webserver
-      image: containers.intersystems.com/intersystems/webgateway:2021.1.0.215.0
+      #image: containers.intersystems.com/intersystems/webgateway:2021.1.0.215.0
+      image: containers.intersystems.com/intersystems/webgateway:2022.1.0.209.0
       init: true
       restart: on-failure
       ports:
-        - '20080:80'
+        - '21080:80'
       volumes:
         - ./webgatewayconfig:/config.d
       environment:
