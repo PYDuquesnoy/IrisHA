@@ -1,7 +1,7 @@
 [Startup]
-MirrorMember=primary
-MirrorSetName=MIR
-ArbiterURL=arbiter:2188
+#MirrorMember=primary
+#MirrorSetName=MIR
+#ArbiterURL=arbiter:2188
 #password SYS
 PasswordHash=8511fe0215912efb646d884e82cd612470b07cd6,t1mt0fka
 
@@ -10,6 +10,7 @@ globals=0,0,250,0,0,0
 routines=35
 
 [Actions]
+ConfigMirror:Name=MIR,Member=primary,ArbiterURL=arbiter:2188
 CreateDatabaseFile:Directory=/dur/config/mgr/appdata,MirrorSetName=MIR,MirrorDBName=appdata,RunCatchupDBOnCreate=1
 CreateDatabase:Name=appdata,Directory=/dur/config/mgr/appdata
 CreateNamespace:Name=myapp,Globals=appdata,Routines=appdata

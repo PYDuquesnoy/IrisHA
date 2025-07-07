@@ -1,62 +1,64 @@
-version: '3.7'
 services:
   app1:
-    environment:
-      - ISC_DATA_DIRECTORY=/dur/config
+    #environment:
+      #- ISC_DATA_DIRECTORY=/dur/config
     ports:
-      - '11773:51773'
-      - '12773:52773'
+      - '21772:1972'
+      - '22773:52773'
     hostname: app1
-    image: intersystems/iris:2020.2.0.211.0
+    container_name: app1
+    image: containers.intersystems.com/intersystems/iris:2023.3
     init: true
     restart: on-failure
     volumes:
-      - app1sys:/dur
+      - ./app1sys:/dur
       - ./license:/license
       - ./logsApp2:/logs
       - ./shared:/shared
-    command: --key /license/iris.key
+    command: --check-caps false --key /license/iris.key
   app2:
-    environment:
-      - ISC_DATA_DIRECTORY=/dur/config
+    #environment:
+      #- ISC_DATA_DIRECTORY=/dur/config
     ports:
-      - '21773:51773'
-      - '22773:52773'
+      - '31772:1972'
+      - '32773:52773'
     hostname: app2
-    image: intersystems/iris:2020.2.0.211.0
+    container_name: app2
+    image: containers.intersystems.com/intersystems/iris:2023.3
     init: true
     restart: on-failure
     volumes:
-      - app2sys:/dur
+      - ./app2sys:/dur
       - ./license:/license
       - ./logsApp1:/logs
       - ./shared:/shared
-    command: --key /license/iris.key
+    command: --check-caps false --key /license/iris.key
 
   irisM1:
-    environment:
-      - ISC_DATA_DIRECTORY=/dur/config
+    #environment:
+      #- ISC_DATA_DIRECTORY=/dur/config
     ports:
-      - '31773:51773'
-      - '32773:52773'
+      - '41772:1972'
+      - '42773:52773'
     expose:
       - '2188'
     hostname: irisM1
-    image: intersystems/iris:2020.2.0.211.0
+    container_name: irisM1
+    image: containers.intersystems.com/intersystems/iris:2023.3
     init: true
     restart: on-failure
     volumes:
-      - m1sys:/dur
+      #- ./m1sys:/dur
       - ./license:/license
       - ./logsM1:/logs
       - ./shared:/shared
-    command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --key /license/iris.key
+    command: --before "/home/irisowner/irissys/startISCAgent.sh 2188" --check-caps false --key /license/iris.key
   
 volumes:
   m1sys: ~
   app1sys: ~
   app2sys: ~
-networks:
-  default:
-    external:
-      name: sam-100115-unix_default
+#networks:
+#  default:
+#    external:
+#      name: sam-100115-unix_default

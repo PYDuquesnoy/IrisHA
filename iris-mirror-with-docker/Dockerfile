@@ -1,4 +1,5 @@
-FROM intersystems/iris:2020.2.0.211.0
+#FROM intersystems/iris:2020.2.0.211.0
+FROM containers.intersystems.com/intersystems/iris:2024.1
 
 USER root
 

@@ -12,7 +12,7 @@ services:
       - '2188'
     hostname: irisM1
     #image: containers.intersystems.com/intersystems/iris:2021.1.0.215.0
-    image: containers.intersystems.com/intersystems/iris:2022.1.0.209.0
+    image: containers.intersystems.com/intersystems/iris:2024.1
     init: true
     restart: on-failure
     volumes:
@@ -34,7 +34,7 @@ services:
       - '2188'
     hostname: irisM2        
     #image: containers.intersystems.com/intersystems/iris:2021.1.0.215.0
-    image: containers.intersystems.com/intersystems/iris:2022.1.0.209.0
+    image: containers.intersystems.com/intersystems/iris:2024.1
     init: true
     restart: on-failure
     volumes:
@@ -48,7 +48,7 @@ services:
     init: true
     hostname: arbiter
     #image: containers.intersystems.com/intersystems/arbiter:2021.1.0.215.0
-    image: containers.intersystems.com/intersystems/arbiter:2022.1.0.209.0
+    image: containers.intersystems.com/intersystems/arbiter:2024.1
     restart: on-failure
     expose:
       - '2188'
@@ -57,7 +57,7 @@ services:
   webserver:
       hostname: webserver
       #image: containers.intersystems.com/intersystems/webgateway:2021.1.0.215.0
-      image: containers.intersystems.com/intersystems/webgateway:2022.1.0.209.0
+      image: containers.intersystems.com/intersystems/webgateway:2024.1
       init: true
       restart: on-failure
       ports:
